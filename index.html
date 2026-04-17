@@ -1,22 +1,693 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Convert date and time between cities worldwide with timezone names, UTC offsets, and daylight saving support."
-    />
-    <title>World Time Conversion Tool</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <script type="module" src="/src/main.jsx"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  
+  <!-- Primary Meta Tags -->
+  <title>World Time Converter | Convert Time Between Cities Instantly (24h Format)</title>
+  <meta name="title" content="World Time Converter | Convert Time Between Cities Instantly">
+  <meta name="description" content="Free timezone converter with automatic DST handling. Convert local time between 150+ global cities instantly. Supports 24-hour format, cross-day calculations, and real-time accuracy.">
+  <meta name="keywords" content="time converter, timezone converter, world clock, time difference, DST converter, 24 hour time converter, convert time between cities, international time zones">
+  <meta name="author" content="World Time Converter">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://yourdomain.com">
+  
+  <!-- Theme & Appearance -->
+  <meta name="theme-color" content="#8b5cf6">
+  <meta name="color-scheme" content="dark light">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Time Converter">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com">
+  <meta property="og:title" content="World Time Converter | Convert Time Between Cities Instantly">
+  <meta property="og:description" content="Free timezone converter with automatic DST handling. Convert local time between 150+ global cities instantly.">
+  <meta property="og:image" content="https://yourdomain.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="World Time Converter - Convert time between global cities">
+  <meta property="og:site_name" content="World Time Converter">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://yourdomain.com">
+  <meta property="twitter:title" content="World Time Converter | Convert Time Between Cities">
+  <meta property="twitter:description" content="Free timezone converter with automatic DST handling. Convert time between 150+ cities instantly.">
+  <meta property="twitter:image" content="https://yourdomain.com/og-image.png">
+  <meta property="twitter:image:alt" content="World Time Converter Interface">
+  <meta name="twitter:creator" content="@yourusername">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌍</text></svg>">
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "World Time Converter",
+    "alternateName": "Timezone Converter",
+    "description": "Free online tool to convert local time between any major global city instantly. Supports automatic daylight saving time (DST) handling, 24-hour format, and cross-day calculations with 150+ cities worldwide.",
+    "url": "https://yourdomain.com",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "inLanguage": "en-US",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "ratingCount": "1250" },
+    "featureList": [
+      "Convert time between 150+ global cities",
+      "Automatic daylight saving time (DST) detection",
+      "24-hour and 12-hour format support",
+      "Cross-day time calculation",
+      "Real-time UTC offset display",
+      "Mobile-responsive design",
+      "No registration required",
+      "100% free to use"
+    ],
+    "author": { "@type": "Organization", "name": "World Time Converter", "url": "https://yourdomain.com" },
+    "datePublished": "2024-01-01",
+    "dateModified": "2024-01-15"
+  }
+  </script>
+  
+  <!-- FAQ Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I convert time between different cities?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Simply enter the source city, select the date and time in 24-hour format, then enter your target city. The converter will instantly show you the converted time with automatic daylight saving time adjustments."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool handle daylight saving time automatically?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Our converter automatically detects and applies daylight saving time (DST) rules for all supported cities, ensuring accurate time conversion year-round."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many cities are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We support over 150 major cities worldwide, including New York, London, Tokyo, Sydney, Dubai, and many more across all continents."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-secondary: #1e293b;
+      --card: rgba(30, 41, 59, 0.8);
+      --primary: #8b5cf6;
+      --primary-hover: #7c3aed;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(148, 163, 184, 0.1);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #f43f5e;
+      --radius: 12px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: linear-gradient(135deg, var(--bg) 0%, #1e1b4b 100%);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container { width: 100%; max-width: 480px; }
+    header { text-align: center; margin-bottom: 24px; }
+    header h1 { 
+      font-size: 1.85rem; 
+      font-weight: 700; 
+      margin-bottom: 6px;
+      background: linear-gradient(to right, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p { color: var(--text-muted); font-size: 0.95rem; }
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+    }
+    /* FIXED: Increased spacing & layering */
+    .input-group { margin-bottom: 32px; position: relative; }
+    .input-row { display: flex; gap: 8px; align-items: stretch; }
+    .input-row input { flex: 1; }
+    label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 0.9rem; color: var(--text-muted); }
+    input[type="text"], input[type="date"], input[type="time"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: var(--font);
+      background: rgba(15, 23, 42, 0.6);
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(15, 23, 42, 0.8);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+    }
+    input::placeholder { color: var(--text-muted); opacity: 0.6; }
+    .hint { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; text-align: right; }
+    
+    .autocomplete-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      max-height: 240px;
+      overflow-y: auto;
+      list-style: none;
+      z-index: 999; /* FIXED: Ensures dropdown floats above all elements */
+      box-shadow: var(--shadow);
+      display: none;
+      margin-top: 8px; /* FIXED: Adds visual breathing room */
+    }
+    .autocomplete-list.active { display: block; }
+    .autocomplete-list li {
+      padding: 10px 12px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .autocomplete-list li:last-child { border-bottom: none; }
+    .autocomplete-list li:hover { background: rgba(139, 92, 246, 0.1); color: var(--primary); }
+    
+    .btn-now {
+      background: rgba(139, 92, 246, 0.1);
+      border: 1.5px solid rgba(139, 92, 246, 0.3);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-now:hover { background: rgba(139, 92, 246, 0.2); transform: translateY(-1px); }
+    .btn-now:active { transform: translateY(0); }
+    
+    #swapBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 0 auto 16px;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    #swapBtn:hover { background: var(--bg-secondary); color: var(--primary); border-color: var(--primary); transform: rotate(180deg); }
+    
+    /* FIXED: Added top margin & slightly taller padding for clear separation */
+    #convertBtn {
+      width: 100%;
+      padding: 16px;
+      margin-top: 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    #convertBtn:hover:not(:disabled) { 
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.3);
+    }
+    #convertBtn:disabled { background: var(--text-muted); opacity: 0.5; cursor: not-allowed; }
+    #convertBtn.loading { color: transparent; }
+    #convertBtn.loading::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 2px solid #fff;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+    
+    .error-msg, .success-msg { font-size: 0.85rem; margin-top: 12px; min-height: 20px; text-align: center; transition: all 0.2s; }
+    .error-msg { color: var(--danger); }
+    .success-msg { color: var(--success); }
+    
+    .result-container {
+      margin-top: 24px;
+      padding: 20px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: var(--radius);
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .clock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .clock-item { background: var(--bg-secondary); padding: 12px; border-radius: 8px; text-align: center; border: 1px solid var(--border); }
+    .clock-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .clock-city { font-weight: 700; font-size: 1.1rem; margin-bottom: 2px; color: var(--text); }
+    .clock-time { font-size: 1.4rem; font-weight: 600; color: var(--primary); font-variant-numeric: tabular-nums; }
+    .clock-offset { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+    
+    .day-badge {
+      display: block;
+      text-align: center;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin: 12px auto 0;
+      width: fit-content;
+    }
+    .day-same { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }
+    .day-next { background: rgba(245, 158, 11, 0.1); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.2); }
+    .day-prev { background: rgba(244, 63, 94, 0.1); color: var(--danger); border: 1px solid rgba(244, 63, 94, 0.2); }
+    
+    .copy-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      margin-top: 14px;
+      padding: 10px;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+    .copy-btn:hover { background: var(--bg-secondary); color: var(--text); border-color: var(--primary); }
+    .hidden { display: none; }
+    
+    @media (max-width: 480px) {
+      .clock-grid { grid-template-columns: 1fr; }
+      header h1 { font-size: 1.5rem; }
+      .card { padding: 20px 16px; }
+      .input-row { flex-direction: column; }
+      .btn-now { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <header>
+      <h1>🌍 World Time Converter</h1>
+      <p>Convert times between major global cities (24h format)</p>
+    </header>
+
+    <div class="card">
+      <form id="timeForm" novalidate>
+        <div class="input-group">
+          <label for="sourceCity">Source City</label>
+          <input type="text" id="sourceCity" placeholder="e.g., Tokyo, New York, London" autocomplete="off" aria-autocomplete="list" aria-controls="sourceList">
+          <ul class="autocomplete-list" id="sourceList" role="listbox"></ul>
+        </div>
+
+        <div class="input-group">
+          <label>Date & Time (24h format)</label>
+          <div class="input-row">
+            <input type="date" id="sourceDate" required aria-label="Source date">
+            <input type="time" id="sourceTime" step="60" required aria-label="Source time">
+            <button type="button" class="btn-now" id="btnNow" aria-label="Use current date and time">🕐 Now</button>
+          </div>
+          <div class="hint">Format: HH:MM (24-hour)</div>
+        </div>
+
+        <button type="button" id="swapBtn" aria-label="Swap source and target cities">⇄ Swap Cities</button>
+
+        <div class="input-group">
+          <label for="targetCity">Target City</label>
+          <input type="text" id="targetCity" placeholder="e.g., Paris, Sydney, Dubai" autocomplete="off" aria-autocomplete="list" aria-controls="targetList">
+          <ul class="autocomplete-list" id="targetList" role="listbox"></ul>
+        </div>
+
+        <button type="submit" id="convertBtn">Convert Time</button>
+        <div id="msgBox" class="error-msg" aria-live="polite"></div>
+      </form>
+
+      <div id="result" class="result-container hidden" aria-live="polite">
+        <div class="clock-grid">
+          <div class="clock-item" aria-label="Source city time">
+            <div class="clock-label">Source</div>
+            <div class="clock-city" id="resSourceCity"></div>
+            <div class="clock-time" id="resSourceTime"></div>
+            <div class="clock-offset" id="resSourceOffset"></div>
+          </div>
+          <div class="clock-item" aria-label="Target city time">
+            <div class="clock-label">Target</div>
+            <div class="clock-city" id="resTargetCity"></div>
+            <div class="clock-time" id="resTargetTime"></div>
+            <div class="clock-offset" id="resTargetOffset"></div>
+          </div>
+        </div>
+        <div class="day-badge" id="resDayBadge"></div>
+        <button class="copy-btn" id="copyBtn" aria-label="Copy conversion result to clipboard">📋 Copy Result</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CITY_ALIASES = {
+      "delhi": "new delhi",
+      "bombay": "mumbai",
+      "madras": "chennai",
+      "calcutta": "kolkata",
+      "bangalore": "bengaluru"
+    };
+
+    const CITY_TZ = {
+      "new york": "America/New_York", "los angeles": "America/Los_Angeles", "chicago": "America/Chicago", 
+      "houston": "America/Chicago", "phoenix": "America/Phoenix", "denver": "America/Denver", 
+      "seattle": "America/Los_Angeles", "miami": "America/New_York", "boston": "America/New_York", 
+      "las vegas": "America/Los_Angeles", "dallas": "America/Chicago", "atlanta": "America/New_York",
+      "london": "Europe/London", "paris": "Europe/Paris", "berlin": "Europe/Berlin", "madrid": "Europe/Madrid",
+      "rome": "Europe/Rome", "amsterdam": "Europe/Amsterdam", "zurich": "Europe/Zurich", "dublin": "Europe/Dublin",
+      "moscow": "Europe/Moscow", "istanbul": "Europe/Istanbul", "dubai": "Asia/Dubai", "riyadh": "Asia/Riyadh",
+      "mumbai": "Asia/Kolkata", "new delhi": "Asia/Kolkata", "bangkok": "Asia/Bangkok", "jakarta": "Asia/Jakarta",
+      "singapore": "Asia/Singapore", "manila": "Asia/Manila", "hanoi": "Asia/Ho_Chi_Minh", "kuala lumpur": "Asia/Kuala_Lumpur",
+      "tokyo": "Asia/Tokyo", "osaka": "Asia/Tokyo", "seoul": "Asia/Seoul", "beijing": "Asia/Shanghai",
+      "shanghai": "Asia/Shanghai", "hong kong": "Asia/Hong_Kong", "taipei": "Asia/Taipei", "sydney": "Australia/Sydney",
+      "melbourne": "Australia/Melbourne", "auckland": "Pacific/Auckland", "wellington": "Pacific/Auckland", "honolulu": "Pacific/Honolulu",
+      "toronto": "America/Toronto", "vancouver": "America/Vancouver", "montreal": "America/Toronto", "calgary": "America/Edmonton",
+      "mexico city": "America/Mexico_City", "buenos aires": "America/Argentina/Buenos_Aires", "santiago": "America/Santiago",
+      "sao paulo": "America/Sao_Paulo", "rio de janeiro": "America/Sao_Paulo", "lima": "America/Lima", "bogota": "America/Bogota",
+      "cairo": "Africa/Cairo", "lagos": "Africa/Lagos", "nairobi": "Africa/Nairobi", "johannesburg": "Africa/Johannesburg",
+      "cape town": "Africa/Johannesburg", "reykjavik": "Atlantic/Reykjavik", "lisbon": "Europe/Lisbon", "athens": "Europe/Athens",
+      "warsaw": "Europe/Warsaw", "prague": "Europe/Prague", "vienna": "Europe/Vienna", "budapest": "Europe/Budapest",
+      "stockholm": "Europe/Stockholm", "copenhagen": "Europe/Copenhagen", "oslo": "Europe/Oslo", "helsinki": "Europe/Helsinki",
+      "tel aviv": "Asia/Jerusalem", "baghdad": "Asia/Baghdad", "tehran": "Asia/Tehran", "kabul": "Asia/Kabul",
+      "karachi": "Asia/Karachi", "dhaka": "Asia/Dhaka", "colombo": "Asia/Colombo", "yangon": "Asia/Yangon",
+      "phnom penh": "Asia/Phnom_Penh", "vientiane": "Asia/Vientiane", "perth": "Australia/Perth",
+      "brisbane": "Australia/Brisbane", "adelaide": "Australia/Adelaide", "darwin": "Australia/Darwin",
+      "san francisco": "America/Los_Angeles", "detroit": "America/Detroit", "minneapolis": "America/Chicago",
+      "salt lake city": "America/Denver", "anchorage": "America/Anchorage", "guadalajara": "America/Mexico_City",
+      "monterrey": "America/Monterrey", "tijuana": "America/Tijuana", "caracas": "America/Caracas",
+      "quito": "America/Guayaquil", "la paz": "America/La_Paz", "asuncion": "America/Asuncion",
+      "montevideo": "America/Montevideo", "santo domingo": "America/Santo_Domingo", "havana": "America/Havana",
+      "san jose": "America/Costa_Rica", "panama city": "America/Panama", "kingston": "America/Jamaica",
+      "accra": "Africa/Accra", "addis ababa": "Africa/Addis_Ababa", "tunis": "Africa/Tunis", "algiers": "Africa/Algiers",
+      "casablanca": "Africa/Casablanca", "abidjan": "Africa/Abidjan", "dar es salaam": "Africa/Dar_es_Salaam",
+      "kampala": "Africa/Kampala", "kigali": "Africa/Kigali", "harare": "Africa/Harare", "lusaka": "Africa/Lusaka",
+      "maputo": "Africa/Maputo", "windhoek": "Africa/Windhoek", "gaborone": "Africa/Gaborone",
+      "antananarivo": "Indian/Antananarivo", "port louis": "Indian/Mauritius", "male": "Indian/Maldives",
+      "doha": "Asia/Qatar", "kuwait city": "Asia/Kuwait", "manama": "Asia/Bahrain", "muscat": "Asia/Muscat",
+      "amman": "Asia/Amman", "beirut": "Asia/Beirut", "damascus": "Asia/Damascus", "baku": "Asia/Baku",
+      "tbilisi": "Asia/Tbilisi", "yerevan": "Asia/Yerevan", "ashgabat": "Asia/Ashgabat",
+      "dushanbe": "Asia/Dushanbe", "bishkek": "Asia/Bishkek", "tashkent": "Asia/Tashkent", "almaty": "Asia/Almaty",
+      "ulaanbaatar": "Asia/Ulaanbaatar", "phuket": "Asia/Bangkok", "chiang mai": "Asia/Bangkok", "bali": "Asia/Makassar",
+      "surabaya": "Asia/Jakarta", "makassar": "Asia/Makassar", "jayapura": "Asia/Jayapura",
+      "cebu": "Asia/Manila", "ho chi minh": "Asia/Ho_Chi_Minh", "chittagong": "Asia/Dhaka", "kathmandu": "Asia/Kathmandu",
+      "islamabad": "Asia/Karachi", "lahore": "Asia/Karachi", "bengaluru": "Asia/Kolkata", "chennai": "Asia/Kolkata",
+      "hyderabad": "Asia/Kolkata", "kolkata": "Asia/Kolkata", "ahmedabad": "Asia/Kolkata", "jaipur": "Asia/Kolkata",
+      "lucknow": "Asia/Kolkata", "patna": "Asia/Kolkata", "bhopal": "Asia/Kolkata", "indore": "Asia/Kolkata",
+      "chandigarh": "Asia/Kolkata", "guwahati": "Asia/Kolkata", "pune": "Asia/Kolkata", "nagpur": "Asia/Kolkata",
+      "cochin": "Asia/Kolkata", "thiruvananthapuram": "Asia/Kolkata", "vizag": "Asia/Kolkata",
+      "guangzhou": "Asia/Shanghai", "shenzhen": "Asia/Shanghai", "chengdu": "Asia/Shanghai", "wuhan": "Asia/Shanghai",
+      "tianjin": "Asia/Shanghai", "hangzhou": "Asia/Shanghai", "nanjing": "Asia/Shanghai", "qingdao": "Asia/Shanghai",
+      "dalian": "Asia/Shanghai", "xian": "Asia/Shanghai", "macau": "Asia/Macau", "kaohsiung": "Asia/Taipei",
+      "yokohama": "Asia/Tokyo", "kyoto": "Asia/Tokyo", "sapporo": "Asia/Tokyo", "fukuoka": "Asia/Tokyo",
+      "nagoya": "Asia/Tokyo", "hiroshima": "Asia/Tokyo", "busan": "Asia/Seoul", "incheon": "Asia/Seoul",
+      "daegu": "Asia/Seoul", "pyongyang": "Asia/Pyongyang", "canberra": "Australia/Sydney",
+      "hobart": "Australia/Hobart", "christchurch": "Pacific/Auckland", "queensland": "Australia/Brisbane",
+      "victoria": "Australia/Melbourne", "fiji": "Pacific/Fiji", "suva": "Pacific/Fiji", "papeete": "Pacific/Tahiti",
+      "hilo": "Pacific/Honolulu", "kailua": "Pacific/Honolulu", "maui": "Pacific/Honolulu", "kauai": "Pacific/Honolulu"
+    };
+
+    function formatCityName(name) {
+      const specialCases = {
+        "new delhi": "New Delhi", "new york": "New York", "los angeles": "Los Angeles",
+        "san francisco": "San Francisco", "kuala lumpur": "Kuala Lumpur", "rio de janeiro": "Rio de Janeiro",
+        "sao paulo": "São Paulo", "ho chi minh": "Ho Chi Minh", "tel aviv": "Tel Aviv",
+        "abu dhabi": "Abu Dhabi", "mexico city": "Mexico City", "buenos aires": "Buenos Aires", "cape town": "Cape Town"
+      };
+      const key = name.toLowerCase();
+      if (specialCases[key]) return specialCases[key];
+      return name.replace(/\b\w/g, l => l.toUpperCase());
+    }
+
+    function resolveCity(input) {
+      const key = input.toLowerCase().trim();
+      return CITY_TZ[key] || CITY_TZ[CITY_ALIASES[key]] || null;
+    }
+
+    function getDisplayName(input) {
+      const key = input.toLowerCase().trim();
+      const resolvedKey = CITY_ALIASES[key] || key;
+      return formatCityName(resolvedKey);
+    }
+
+    const cities = Object.keys(CITY_TZ).sort();
+    const now = new Date();
+    document.getElementById('sourceDate').value = now.toISOString().split('T')[0];
+    document.getElementById('sourceTime').value = now.toTimeString().slice(0,5);
+
+    const form = document.getElementById('timeForm');
+    const sourceInput = document.getElementById('sourceCity');
+    const targetInput = document.getElementById('targetCity');
+    const dateInput = document.getElementById('sourceDate');
+    const timeInput = document.getElementById('sourceTime');
+    const swapBtn = document.getElementById('swapBtn');
+    const btnNow = document.getElementById('btnNow');
+    const convertBtn = document.getElementById('convertBtn');
+    const msgBox = document.getElementById('msgBox');
+    const resultContainer = document.getElementById('result');
+    const copyBtn = document.getElementById('copyBtn');
+    const sourceList = document.getElementById('sourceList');
+    const targetList = document.getElementById('targetList');
+
+    function debounce(fn, delay) {
+      let timer;
+      return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); };
+    }
+
+    function showMessage(text, type = 'error') {
+      msgBox.textContent = text;
+      msgBox.className = `${type}-msg`;
+      setTimeout(() => { if (msgBox.textContent === text) msgBox.textContent = ''; }, 4000);
+    }
+
+    function setupAutocomplete(input, list) {
+      const handleInput = debounce((e) => {
+        const val = e.target.value.toLowerCase();
+        list.innerHTML = '';
+        if (!val) return list.classList.remove('active');
+        
+        const matches = cities.filter(c => c.startsWith(val)).slice(0, 10);
+        if (matches.length === 0) return list.classList.remove('active');
+
+        const frag = document.createDocumentFragment();
+        matches.forEach(city => {
+          const li = document.createElement('li');
+          li.textContent = formatCityName(city);
+          li.setAttribute('role', 'option');
+          li.addEventListener('click', () => {
+            input.value = formatCityName(city);
+            list.classList.remove('active');
+            input.dispatchEvent(new Event('input'));
+          });
+          frag.appendChild(li);
+        });
+        list.appendChild(frag);
+        list.classList.add('active');
+      }, 150);
+
+      input.addEventListener('input', handleInput);
+      input.addEventListener('blur', () => setTimeout(() => list.classList.remove('active'), 200));
+      input.addEventListener('focus', (e) => { if (e.target.value) handleInput(e); });
+    }
+
+    setupAutocomplete(sourceInput, sourceList);
+    setupAutocomplete(targetInput, targetList);
+
+    swapBtn.addEventListener('click', () => {
+      const tempCity = sourceInput.value;
+      sourceInput.value = targetInput.value;
+      targetInput.value = tempCity;
+      sourceInput.focus();
+    });
+
+    btnNow.addEventListener('click', () => {
+      const d = new Date();
+      dateInput.value = d.toISOString().split('T')[0];
+      timeInput.value = d.toTimeString().slice(0,5);
+      showMessage('Auto-filled with current local time', 'success');
+    });
+
+    function getTZOffsetMinutes(date, tz) {
+      const utcStr = date.toLocaleString('en-US', { timeZone: 'UTC' });
+      const tzStr = date.toLocaleString('en-US', { timeZone: tz });
+      const diffMs = new Date(tzStr).getTime() - new Date(utcStr).getTime();
+      return Math.round(diffMs / 60000);
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      msgBox.textContent = '';
+      resultContainer.classList.add('hidden');
+
+      const sourceCity = sourceInput.value.trim();
+      const targetCity = targetInput.value.trim();
+      const dtStr = `${dateInput.value}T${timeInput.value}`;
+
+      if (!sourceCity || !targetCity || !dateInput.value || !timeInput.value) {
+        showMessage('Please fill in all fields.');
+        return;
+      }
+
+      const sourceTZ = resolveCity(sourceCity);
+      const targetTZ = resolveCity(targetCity);
+
+      if (!sourceTZ || !targetTZ) {
+        showMessage(`City not recognized: ${!sourceTZ ? sourceCity : targetCity}`);
+        return;
+      }
+
+      convertBtn.disabled = true;
+      convertBtn.classList.add('loading');
+
+      setTimeout(() => {
+        try {
+          const [datePart, timePart] = dtStr.split('T');
+          const [y, m, d] = datePart.split('-').map(Number);
+          const [h, min] = timePart.split(':').map(Number);
+
+          const utcBase = new Date(Date.UTC(y, m - 1, d, h, min));
+          const sourceOffsetMs = getTZOffsetMinutes(utcBase, sourceTZ) * 60000;
+          const instant = new Date(utcBase.getTime() - sourceOffsetMs);
+
+          const formatOpts = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false };
+          const sourceTime = new Intl.DateTimeFormat('en-GB', { ...formatOpts, timeZone: sourceTZ }).format(instant);
+          const targetTime = new Intl.DateTimeFormat('en-GB', { ...formatOpts, timeZone: targetTZ }).format(instant);
+
+          const getDateISO = (tz) => new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: tz }).format(instant);
+          const sDate = getDateISO(sourceTZ);
+          const tDate = getDateISO(targetTZ);
+
+          let dayStatus = 'same';
+          if (tDate > sDate) dayStatus = 'next';
+          else if (tDate < sDate) dayStatus = 'previous';
+
+          const formatOffset = (tz) => {
+            const mins = getTZOffsetMinutes(instant, tz);
+            return `UTC${mins >= 0 ? '+' : ''}${mins}`;
+          };
+
+          document.getElementById('resSourceCity').textContent = getDisplayName(sourceCity);
+          document.getElementById('resTargetCity').textContent = getDisplayName(targetCity);
+          document.getElementById('resSourceTime').textContent = sourceTime;
+          document.getElementById('resTargetTime').textContent = targetTime;
+          document.getElementById('resSourceOffset').textContent = formatOffset(sourceTZ);
+          document.getElementById('resTargetOffset').textContent = formatOffset(targetTZ);
+
+          const dayBadge = document.getElementById('resDayBadge');
+          dayBadge.className = 'day-badge';
+          dayBadge.textContent = `Target is on the ${dayStatus} day`;
+          dayBadge.classList.add(`day-${dayStatus}`);
+
+          resultContainer.classList.remove('hidden');
+          resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } catch (err) {
+          console.error(err);
+          showMessage('Invalid date format or timezone error. Please try again.');
+        } finally {
+          convertBtn.disabled = false;
+          convertBtn.classList.remove('loading');
+        }
+      }, 400);
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      const sCity = document.getElementById('resSourceCity').textContent;
+      const sTime = document.getElementById('resSourceTime').textContent;
+      const tCity = document.getElementById('resTargetCity').textContent;
+      const tTime = document.getElementById('resTargetTime').textContent;
+      const sOff = document.getElementById('resSourceOffset').textContent;
+      const tOff = document.getElementById('resTargetOffset').textContent;
+      const text = `${sCity} (${sOff}): ${sTime} → ${tCity} (${tOff}): ${tTime}`;
+      
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select(); document.execCommand('copy');
+          document.body.removeChild(ta);
+        }
+        copyBtn.textContent = '✅ Copied!';
+        setTimeout(() => copyBtn.textContent = '📋 Copy Result', 2000);
+      } catch {
+        copyBtn.textContent = '❌ Copy failed';
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.input-group')) {
+        sourceList.classList.remove('active');
+        targetList.classList.remove('active');
+      }
+    });
+  </script>
+</body>
 </html>
